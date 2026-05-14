@@ -1,0 +1,39 @@
+body {
+  margin:0;
+  padding:0;
+  font-family: serif;
+}
+
+main, aside, footer, details {
+  width:600px;
+  margin:auto;
+  margin-top:2em;
+}
+
+aside {
+  background:#aaa;
+  padding:2em;
+}
+
+main {
+  background: #eee;
+  padding:1em 2em 1em 2em;
+}
+
+.dialog-bar {
+  background: #222;
+  color: #fafafa;
+  padding: 0.8em 1em;
+  margin-top: 1em;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+}
+
+footer {
+  background: #333;
+  padding:1em 2em 1em 2em;
+  color:white;
+}
