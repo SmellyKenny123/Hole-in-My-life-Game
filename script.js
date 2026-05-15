@@ -177,7 +177,7 @@ function Game() {
 							ctx.drawImage(kingscourt,x*tileWidth,y*tileHeight,tileWidth,tileHeight);
 							break;
 						default:
-							ctx.fillStyle = 'darkbrown';
+							ctx.fillStyle = '#BA9A6E';
 							ctx.fillRect(x*tileWidth,y*tileHeight,tileWidth,tileHeight);
 							break;
 					}
