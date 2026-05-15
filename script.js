@@ -25,13 +25,22 @@ function Game() {
 			[1,0,1,1,0,0,1,0,0,0,0,1],
 			[1,0,0,1,0,0,1,0,0,0,0,1],
 			[1,0,0,1,0,0,1,0,0,1,1,1],
-			[1,1,0,1,0,0,1,0,0,0,0,1],
+			[1,1,0,1,0,0,2,0,0,0,0,1],
 			[1,0,0,0,0,0,0,0,0,0,0,1],
 			[1,1,1,1,1,1,1,1,1,1,1,1]
 			],
 			hero: { x: 5, y: 10 },
 			item: { x: 10, y: 1 },
-			npc: { x: 3, y: 8, dialog: 'Hello there! Welcome to King Court.' }
+			npc: { x: 3, y: 8, dialog: [
+					'(Tim) Hey Jack, you need money for college, right?',
+					'(Jack) Yeah?',
+					'(Tim) If you want to make some money, you can sell some weed for me.',
+					'(Jack) That would be great, what do you want me to do?',
+					'(Tim) There is this great place, but I need $200 to buy it, then we can sell it for even more afterwards. You will get your $200 back, and more!',
+					'(Jack) Hell yeah dude!',
+					'(Tim) Lets do it next week. I will take the money, go inside, get the weed, then we go and sell it for bank.',
+					'(Jack) Sounds great, I will see you next week.'
+				] }
 		},
 		{
 			map: [
@@ -50,7 +59,16 @@ function Game() {
 			],
 			hero: { x: 1, y: 1 },
 			item: { x: 10, y: 10 },
-			npc: { x: 8, y: 5, dialog: 'This is level 2. Keep going and collect the item!' }
+			npc: { x: 8, y: 5, dialog: [
+					'(Tim) Hey Jack, you need money for college, right?',
+					'(Jack) Yeah?',
+					'(Tim) If you want to make some money, you can sell some weed for me.',
+					'(Jack) That would be great, what do you want me to do?',
+					'(Tim) There is this great place, but I need $200 to buy it, then we can sell it for even more afterwards. You will get your $200 back, and more!',
+					'(Jack) Hell yeah dude!',
+					'(Tim) Lets do it next week. I will take the money, go inside, get the weed, then we go and sell it for bank.',
+					'(Jack) Sounds great, I will see you next week.'
+				] }
 		}
 	];
 	
@@ -60,6 +78,8 @@ function Game() {
 	var spriteFront = document.getElementById('madcat');
 	var spriteBack = document.getElementById('madcatback');
 	var spriteLeft = document.getElementById('madcatleft');
+	var kingscourt = document.getElementById('kingscourt');
+	var level1 = document.getElementById('level1');
 	var sprite = spriteFront;
 	var dialogBar = document.getElementById('dialogBar');
 
@@ -125,6 +145,7 @@ function Game() {
 		npc.x = levels[currentLevel].npc.x;
 		npc.y = levels[currentLevel].npc.y;
 		npc.dialog = levels[currentLevel].npc.dialog;
+		npc.dialogIndex = 0;
 		setDialog('Level ' + (currentLevel + 1) + ': reach the yellow item to continue. Press T near the NPC to talk.');
 	}
 
@@ -150,13 +171,16 @@ function Game() {
 				for (var x = 0; x < field[y].length; x++) {
 					switch (field[y][x]) {
 						case 1:
-							ctx.fillStyle = 'gray';
+							ctx.drawImage(level1,x*tileWidth,y*tileHeight,tileWidth,tileHeight);
+							break;
+						case 2:
+							ctx.drawImage(kingscourt,x*tileWidth,y*tileHeight,tileWidth,tileHeight);
 							break;
 						default:
-							ctx.fillStyle = 'lightgray';
+							ctx.fillStyle = 'darkbrown';
+							ctx.fillRect(x*tileWidth,y*tileHeight,tileWidth,tileHeight);
 							break;
 					}
-					ctx.fillRect(x*tileWidth,y*tileHeight,tileWidth,tileHeight);
 				}
 			}
 			ctx.font = '16px Arial';
@@ -220,7 +244,17 @@ function Game() {
 				case 84:
 					// Talk
 					if (Math.abs(hero.x - npc.x) + Math.abs(hero.y - npc.y) <= 1) {
-						setDialog(npc.dialog);
+						if (Array.isArray(npc.dialog)) {
+							if (npc.dialogIndex < npc.dialog.length) {
+								setDialog(npc.dialog[npc.dialogIndex]);
+								npc.dialogIndex += 1;
+							} else {
+								// At end of conversation: keep showing the final line
+								setDialog(npc.dialog[npc.dialog.length - 1]);
+							}
+						} else {
+							setDialog(npc.dialog);
+						}
 					} else {
 						setDialog('No one is close enough to talk to.');
 					}
