@@ -17,21 +17,21 @@ function Game() {
 		{
 			map: [
 			[1,1,1,1,1,1,1,1,1,1,1,1],
-			[1,0,0,0,0,0,1,0,0,0,0,1],
-			[1,0,0,1,0,0,1,0,0,1,1,1],
-			[1,1,0,1,0,0,1,0,0,0,0,1],
+			[1,0,0,1,0,0,0,1,0,0,0,1],
+			[1,0,0,1,0,0,0,1,0,0,0,1],
+			[1,0,0,1,0,0,0,1,0,0,0,1],
+			[1,0,0,1,0,0,0,1,0,0,0,1],
+			[1,0,0,1,0,0,0,1,0,0,0,1],
+			[1,1,0,1,0,1,1,1,0,1,1,1],
+			[1,2,0,0,0,0,0,0,0,0,0,1],
+			[1,0,0,0,0,0,0,0,0,2,1,1],
 			[1,0,0,0,0,0,0,0,0,0,0,1],
-			[1,0,0,0,0,0,1,1,1,1,0,1],
-			[1,0,1,1,0,0,1,0,0,0,0,1],
-			[1,0,0,1,0,0,1,0,0,0,0,1],
-			[1,0,0,1,0,0,1,0,0,1,1,1],
-			[1,1,0,1,0,0,2,0,0,0,0,1],
-			[1,0,0,0,0,0,0,0,0,0,0,1],
+			[1,0,0,0,0,0,0,0,0,0,1,1],
 			[1,1,1,1,1,1,1,1,1,1,1,1]
 			],
 			hero: { x: 5, y: 10 },
 			item: { x: 10, y: 1 },
-			npc: { x: 3, y: 8, dialog: [
+			npc: { x: 10, y: 9, dialog: [
 					'(Tim) Hey Jack, you need money for college, right?',
 					'(Jack) Yeah?',
 					'(Tim) If you want to make some money, you can sell some weed for me.',
@@ -75,9 +75,9 @@ function Game() {
 	var currentLevel = 0;
 	var field = null;
 	
-	var spriteFront = document.getElementById('madcat');
-	var spriteBack = document.getElementById('madcatback');
-	var spriteLeft = document.getElementById('madcatleft');
+	var spriteFront = document.getElementById('jack');
+	var spriteBack = document.getElementById('jackback');
+	var spriteLeft = document.getElementById('jackleft');
 	var kingscourt = document.getElementById('kingscourt');
 	var level1 = document.getElementById('level1');
 	var sprite = spriteFront;
